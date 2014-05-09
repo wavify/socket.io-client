@@ -1985,6 +1985,8 @@
           self.transport = self.getTransport();
           self.redoTransports = true;
           self.connect();
+          self.publish('reconnecting', self.reconnectionDelay, self.reconnectionAttempts);
+          self.reconnectionTimer = setTimeout(maybeReconnect, self.reconnectionDelay);
         } else {
           self.publish('reconnect_failed');
           reset();
